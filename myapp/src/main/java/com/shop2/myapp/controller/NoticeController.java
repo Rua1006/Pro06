@@ -2,6 +2,7 @@ package com.shop2.myapp.controller;
 
 import com.shop2.myapp.dto.NoticeDTO;
 import com.shop2.myapp.service.NoticeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +16,10 @@ import java.util.List;
 @RequestMapping("/notice/")
 public class NoticeController {
 
-    @Resource
+    @Autowired
     private NoticeService noticeService;
 
+    //게시글 리스트
     @GetMapping("list")
     public String noticeList(Model model) throws Exception {
         List<NoticeDTO> noticeList = noticeService.noticeList();

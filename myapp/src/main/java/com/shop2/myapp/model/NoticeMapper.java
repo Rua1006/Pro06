@@ -7,5 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface NoticeMapper {
-    public List<NoticeDTO> noticeList() throws Exception;
+
+    List<NoticeDTO> noticeList() throws Exception;
 }
