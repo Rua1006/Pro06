@@ -18,6 +18,8 @@ public class MybatisConfig {
         sessionFactory.setDataSource(dataSource);
 
         Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:mybatis/mapper/*Mapper.xml");
+        sessionFactory.setMapperLocations(res);
+
 
         return sessionFactory.getObject();
     }

@@ -9,6 +9,9 @@ create table notice(
 insert into notice(notiNo, title, content, author) values (1, '테스트', '테스트내용', 'admin');
     
 select*from notice;
+select*from sample;
+
+drop table notice;
 
 desc notice;
 commit;
