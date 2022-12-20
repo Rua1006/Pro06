@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface NoticeService {
     public List<NoticeDTO> noticeList() throws Exception;
+    public NoticeDTO getNotice(int notiNo) throws Exception;
 }

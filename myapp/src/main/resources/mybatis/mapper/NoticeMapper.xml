@@ -4,4 +4,7 @@
     <select id="noticeList" resultType="com.shop2.myapp.dto.NoticeDTO">
         select * from notice order by resdate desc
     </select>
+    <select id="getNotice" resultType="com.shop2.myapp.dto.NoticeDTO">
+        select * from notice where notiNo=#{notiNo}
+    </select>
 </mapper>

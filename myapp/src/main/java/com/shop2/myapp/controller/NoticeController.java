@@ -2,6 +2,8 @@ package com.shop2.myapp.controller;
 
 import com.shop2.myapp.dto.NoticeDTO;
 import com.shop2.myapp.service.NoticeService;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,17 +15,18 @@ import java.rmi.server.ExportException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/notice/")
+@RequiredArgsConstructor
+@RequestMapping("/notice")
 public class NoticeController {
 
-    @Autowired
-    private NoticeService noticeService;
+    private final NoticeService noticeService;
 
-    //게시글 리스트
-    @GetMapping("list")
+    //게시글 리스트 123
+    @GetMapping("/list")
     public String noticeList(Model model) throws Exception {
         List<NoticeDTO> noticeList = noticeService.noticeList();
         model.addAttribute("noticeList", noticeList);
-        return "/notice/noticeList";
+        return "notice/noticeList";
     }
+
 }

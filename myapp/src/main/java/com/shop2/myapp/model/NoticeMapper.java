@@ -9,5 +9,6 @@ import java.util.List;
 public interface NoticeMapper {
 
     List<NoticeDTO> noticeList();
+    NoticeDTO getNotice(int notiNo);
 
 }
