@@ -55,7 +55,7 @@
                 <tr th:each="notice, status : ${noticeList}">
                   <td th:text="${status.count}"></td>
                   <td>
-                    <a th:href="@{notice/detail(notiNo=${notice.notiNo})}" th:text="${notice.title}"></a>
+                    <a th:href="@{detail(notiNo=${notice.notiNo})}" th:text="${notice.title}"></a>
                   </td>
                   <td th:text="${notice.resdate}"></td>
                 </tr>

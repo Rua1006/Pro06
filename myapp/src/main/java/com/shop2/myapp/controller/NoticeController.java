@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import java.rmi.server.ExportException;
@@ -27,6 +28,13 @@ public class NoticeController {
         List<NoticeDTO> noticeList = noticeService.noticeList();
         model.addAttribute("noticeList", noticeList);
         return "notice/noticeList";
+    }
+
+    @GetMapping("/detail")
+    public String getNotice(@RequestParam("notiNo") int notiNo, Model model) throws Exception {
+        NoticeDTO dto = noticeService.getNotice(notiNo);
+        model.addAttribute("dto", dto);
+        return "notice/noticeDetail";
     }
 
 }
