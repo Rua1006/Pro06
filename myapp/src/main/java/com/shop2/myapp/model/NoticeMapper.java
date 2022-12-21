@@ -10,5 +10,5 @@ public interface NoticeMapper {
 
     List<NoticeDTO> noticeList();
     NoticeDTO getNotice(int notiNo);
-
+    void noticeInsert(NoticeDTO dto);
 }

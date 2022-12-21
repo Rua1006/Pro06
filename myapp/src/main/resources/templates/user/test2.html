@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>공지사항</title>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<header class="header">
+  <th:block th:include="common/navbar"></th:block>
+  <th:block th:include="common/sidebar"></th:block>
+  <style>
+    table {
+      margin: 0 auto;
+    }
+  </style>
+</header>
+<seciton class="container">
+  <h2>Jquery Ajax 데이터 송수신 메소드 - ajax()</h2>
+    <article class="data">
+      <div><h2>Ajax Data Trans</h2></div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>아이디</th>
+            <th>비밀번호</th>
+            <th>방문횟수</th>
+          </tr>
+        </thead>
+        <tbody id="result">
+
+        </tbody>
+      </table>
+      <button type="button" id="btn1">회원목록불러오기</button>
+      <div id="msg"></div>
+    </article>
+</seciton>
+<br><hr><br>
+<script>
+  $(document).ready(function (){
+    $("#btn1").click(function (){
+      $.ajax({
+        url:"/user/userList.do",
+        //data:id,
+        contentType:'application/json;charset=utf-8',
+        method:"GET",
+        dataType:"json"
+      })
+      .done(function(res){ //요청 처리에 대한 성공시 처리할 문장
+        console.log(res);
+        $.each(res, function (index, value){
+          var tr = "<tr>";
+          tr = tr + "<td>"+(index+1)+"</td>";
+          tr = tr + "<td>"+value['id']+"</td>";
+          tr = tr + "<td>"+value['pw']+"</td>";
+          tr = tr + "<td>"+value['vcnt']+"</td>";
+          tr = tr +"</tr>";
+          $("#result").append(tr);
+        });
+      })
+      .fail(function(xhr, status, errorThrown){ //요청 처리에 대한 실패시 처리할 문장
+        $("#msg").text("회원정보를 불러오지 못했습니다."+xhr.status);
+      });
+    });
+  });
+</script>
+<th:block th:include="common/footer"></th:block>
+</body>
+</html>

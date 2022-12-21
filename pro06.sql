@@ -6,17 +6,37 @@ create table notice(
 	resdate date default sysdate
     );
     
+drop table notice;
     
+create sequence notival;
+drop sequence notival;
+
+desc notice;
+select*from notice;
+
+update notice set notiNo=2 where notiNo=3;
+
+insert into notice(notiNo, title, content, author) values (notival.nextval, '테스트', '테스트내용', 'admin');
 insert into notice(notiNo, title, content, author) values (1, '테스트', '테스트내용', 'admin');
     
-select*from notice;
-select*from sample;
-
 create table sample(
     id varchar(10) not null,
     pw varchar(10) not null,
     vcnt varchar(10)
     );
+    
+insert into sample values('kbs',1234,0);     
+select*from sample;
 
-desc notice;
+create table user1(
+    id varchar(10) not null,
+    pw varchar(10) not null,
+    vcnt varchar(10)
+    );
+insert into user1 values('kbs',1234,0);
+insert into user1 values('kbs1',1234,0);
+insert into user1 values('kbs2',1234,0);
+insert into user1 values('kbs3',1234,0);
+insert into user1 values('kbs4',1234,0);
+insert into user1 values('kbs5',1234,0);
 commit;
