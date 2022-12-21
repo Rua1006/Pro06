@@ -11,6 +11,6 @@
         <selectKey keyProperty="notiNo" order="BEFORE" resultType="integer">
             select notival.nextval from dual
         </selectKey>
-        insert into notice(notiNo, title, content, author) values (#{notiNo}, #{title}, #{content}, '관리자');
+        insert into notice(notiNo, title, content, author) values (notiNo, #{title}, #{content}, '관리자');
     </insert>
 </mapper>
