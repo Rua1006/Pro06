@@ -4,12 +4,14 @@ import com.shop2.myapp.dto.SampleDTO;
 import com.shop2.myapp.dto.UserDTO;
 import com.shop2.myapp.service.SampleService;
 import com.shop2.myapp.service.UserService;
+import com.shop2.myapp.util.AES256;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 import java.util.List;
@@ -33,8 +35,8 @@ public class UserController {
 
     @GetMapping("/idCheck.do")
     @ResponseBody
-    public boolean idCheck(@RequestParam("id") String id) throws Exception {
-        UserDTO user = userService.getUser(id);
+    public boolean idCheck(@RequestParam("userId") String userid) throws Exception {
+        UserDTO user = userService.getUser(userid);
         if (user == null) {
             return true;
         } else {
@@ -66,28 +68,42 @@ public class UserController {
         return dto;
     }
 
-    @GetMapping("/test4")
-    public String getLogin(Model model) throws Exception {
-        return "user/test4";
-    }
-
     //@PostMapping("getLogin.do")
     //@ResponseBody
     //public UserDTO getLogin(@ModelAttribute("user") UserDTO user, Model model) throws Exception {
     //UserDTO usr = userService.getLogin(user.getId(), user.getPw());
     // }
+    @GetMapping("/join")
+    public String insertUser(HttpServletRequest request, Model model) throws Exception {
+        return "user/join";
+    }
+
+    @PostMapping("/joinUser")
+    public String insertUser(@ModelAttribute("user") UserDTO user, Model model) throws Exception {
+        AES256 aes256 = new AES256();
+        user.setUserPw(aes256.encrypt(user.getUserPw()));
+        userService.insertUser(user);
+        return "redirect:/";
+    }
+
+    @GetMapping("/loginForm")
+    public String getLogin(HttpServletRequest request, Model model) throws Exception {
+        return "user/loginForm";
+    }
 
     @GetMapping("/getLogin.do")
     @ResponseBody
-    public HttpSession getLogin(@RequestParam("id") String id, @RequestParam("pw") String pw) throws Exception {
-        UserDTO user = userService.getLogin(id, pw);
-        if(user==null) {
+    public UserDTO getLogin(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw, Model model) throws Exception {
+        AES256 aes256 = new AES256();
+        userPw = aes256.encrypt(userPw);
+        UserDTO user = userService.getLogin(userId, userPw);
+        if (user == null) {
             session.invalidate();
         } else {
-            session.setAttribute("sid", user.getId());
-            session.setAttribute("svcnt", user.getVcnt());
+            session.setAttribute("sid", user.getUserId());
+            session.setAttribute("sname", user.getUserName());
         }
-        return session;
+        return user;
     }
 }
     

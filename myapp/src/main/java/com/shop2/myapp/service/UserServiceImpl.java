@@ -21,12 +21,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO getUser(String id) throws Exception {
-        return UserMapper.getUser(id);
+    public UserDTO getUser(String userid) throws Exception {
+        return UserMapper.getUser(userid);
     }
 
     @Override
-    public UserDTO getLogin(String id, String pw) throws Exception {
-        return UserMapper.getLogin(id, pw);
+    public UserDTO getLogin(String userid, String userpw) throws Exception {
+        return UserMapper.getLogin(userid, userpw);
+    }
+
+    @Override
+    public void insertUser(UserDTO user) throws Exception {
+        UserMapper.insertUser(user);
     }
 }

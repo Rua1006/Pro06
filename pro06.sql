@@ -28,15 +28,13 @@ create table sample(
 insert into sample values('kbs',1234,0);     
 select*from sample;
 
-create table user1(
-    id varchar(10) not null,
-    pw varchar(10) not null,
-    vcnt varchar(10)
+-- 회원
+create table user_shop(
+    userNo number primary key, 
+    userId varchar2(20) not null, 
+    userPw varchar2(500) not null, 
+    userName varchar2(20),
+    email varchar2(20),
+    regdate date default sysdate
     );
-insert into user1 values('kbs',1234,0);
-insert into user1 values('kbs1',1234,0);
-insert into user1 values('kbs2',1234,0);
-insert into user1 values('kbs3',1234,0);
-insert into user1 values('kbs4',1234,0);
-insert into user1 values('kbs5',1234,0);
 commit;
