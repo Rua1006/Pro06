@@ -37,4 +37,7 @@ create table user_shop(
     email varchar2(20),
     regdate date default sysdate
     );
+select * from user_shop;
+create sequence user_seq;
+    
 commit;
