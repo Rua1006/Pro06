@@ -105,5 +105,11 @@ public class UserController {
         }
         return user;
     }
+
+    @RequestMapping("/logout")
+    public String userLogout(HttpSession session) throws Exception {
+        session.invalidate();
+        return "redirect:/";
+    }
 }
     
